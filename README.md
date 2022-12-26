@@ -1,2 +1,0 @@
-# MoviePlug
-Final project app
