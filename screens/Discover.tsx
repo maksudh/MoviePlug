@@ -31,12 +31,12 @@ const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView>
         <Text>Current Trending Movies</Text>
-        {data.map((data, key) => {
+          {data.map((data, key) => {
               return (
                 <View>
                   <Card style={styles.moviecard} elevation={7}>
                     <Text key={key}>
-                      <Text style={styles.movieTitle}>{data.title}                  </Text>
+                      <Text style={styles.movieTitle}>{data.title}</Text>
                         {'\n'}{'\n'}
                           <Image
                             resizeMode='cover'
@@ -44,23 +44,9 @@ const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             source={{uri: posterBaseUrl+data.poster_path}}
                           />
                     </Text>
-                      {shouldShow ? (
-                        <View>
-                          <Text style={styles.overview}>{data.overview}</Text>
-                          <Text>Popularity: {data.popularity}</Text>
-                          <Text>Release date: {data.release_date}</Text>
-                          <Text>Rating: {data.vote_average}</Text>
-                          <Text>Voters: {data.vote_count}</Text>
-                        </View>
-                      ) : null}
-                      <Button
-                        title="Add to watchlist"
-                      />
-                      <Text></Text>
-                      <Button
-                        title="Details"
-                        onPress={() => setShouldShow(!shouldShow)}
-                      />
+                    <Text></Text>
+                    <Button title="Open in new page" onPress={() => navigation.navigate('View Recent', 
+                    { genre_ids : data.genre_ids, id : data.id })}/>
                   </Card>
                 </View>
               );

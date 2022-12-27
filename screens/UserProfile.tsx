@@ -15,7 +15,6 @@ const UserProfileScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const db = getDatabase();
   const [data, setData] = useState([]);
   const [moviekeys, setMoviekeys] = useState([]);
-  const [shouldShow, setShouldShow] = useState(false);
   const posterBaseUrl = "https://image.tmdb.org/t/p/w500"
 
   // NEED TO MAKE THIS USE EFFECT CANNOT STAY AS A BUTTON 
@@ -65,35 +64,21 @@ const UserProfileScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                   <View>
                     <Card style={styles.moviecard} elevation={7}>
                       <Text key={key}>
-                        <Text style={styles.movieTitle}>{data.title}                  </Text>
+                        <Text style={styles.movieTitle}>{data.title}</Text>
                           {'\n'}{'\n'}
-                            <Image
-                              resizeMode='cover'
-                              style={styles.movieposter}
-                              source={{uri: posterBaseUrl+data.poster_path}}
-                            />
+                        <Image
+                          resizeMode='cover'
+                          style={styles.movieposter}
+                          source={{uri: posterBaseUrl+data.poster_path}}
+                        />
                       </Text>
-                        {shouldShow ? (
-                          <View>
-                            <Text></Text>
-                            <Text style={styles.overview}>{data.overview}</Text>
-                            <Text>Popularity: {data.popularity}</Text>
-                            <Text>Release date: {data.release_date}</Text>
-                            <Text>Rating: {data.vote_average}</Text>
-                            <Text>Voters: {data.vote_count}</Text>
-                          </View>
-                        ) : null}
-                        <Text></Text>
-                        <Button
-                          title="Remove"
-                          onPress={() => removeEntry(String(user?.uid),key)
-                            }
-                        />
-                        <Text></Text>
-                        <Button
-                          title="Details"
-                          onPress={() => setShouldShow(!shouldShow)}
-                        />
+                      <Text></Text>
+                      <Button
+                        title="Remove"
+                        onPress={() => removeEntry(String(user?.uid),key)
+                          }
+                      />
+                      <Text></Text>
                     </Card>
                   </View>
                 );

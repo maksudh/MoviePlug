@@ -19,6 +19,7 @@ export default function UserStack() {
         <Tab.Screen name="Discover" component={DiscoverScreen}/>
         <Tab.Screen name="Search" component={SearchScreen}/>
         <Tab.Screen name="User Profile" component={UserProfileScreen}/>
+        <Tab.Screen name="View Recent" component={MoviePage}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
