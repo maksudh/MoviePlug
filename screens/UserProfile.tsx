@@ -7,6 +7,7 @@ import { Button, Card } from 'react-native-elements';
 import { getAuth, signOut} from 'firebase/auth';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import { getDatabase, ref, child, push, get, update, onValue, remove } from "firebase/database";
+import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 const auth = getAuth();
 
@@ -54,66 +55,146 @@ const UserProfileScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.userBar}>
+        <Text style={{
+          fontSize: 18,
+          marginTop: 7
+          }}>{user?.email}</Text>
+        <Button 
+        title="Sign Out"
+        icon={{
+          name: 'user',
+          type: 'font-awesome',
+          size: 15,
+          color: 'white',
+        }}
+        iconRight
+        iconContainerStyle={{ marginLeft: 10 }}
+        titleStyle={{ fontWeight: '700' }}
+        buttonStyle={{
+          backgroundColor: '#fd9426',
+          borderColor: 'transparent',
+          borderWidth: 0,
+          borderRadius: 30,
+        }}
+        containerStyle={{
+          width: 130,
+        }}
+        onPress={() => signOut(auth)} />
+        <Button title="L" onPress={() => getUserData()}/>
+      </View>
       <ScrollView>
-        <Text>Welcome {user?.email}!</Text>
-        <Button title="Sign Out" onPress={() => signOut(auth)} />
-        <Text></Text>
-        <Button title="LOAD DATA PLACEHOLDER" onPress={() => getUserData()}/>
-          {data.map((data, key) => {
-                return (
-                  <View>
-                    <Card style={styles.moviecard} elevation={7}>
-                      <Text key={key}>
-                        <Text style={styles.movieTitle}>{data.title}</Text>
-                          {'\n'}{'\n'}
-                        <Image
-                          resizeMode='cover'
-                          style={styles.movieposter}
-                          source={{uri: posterBaseUrl+data.poster_path}}
-                        />
-                      </Text>
-                      <Text></Text>
-                      <Button
-                        title="Remove"
-                        onPress={() => removeEntry(String(user?.uid),key)
-                          }
+        {data.map((data, key) => {
+              return (
+                <Card>
+                  <Text key={key} style={styles.movieTitle}>{data.title}</Text>
+                  <View style={styles.movieCard}>
+                    <Image
+                        key={key}
+                        resizeMode='cover'
+                        style={styles.movieposter}
+                        source={{uri: posterBaseUrl+data.poster_path}}
                       />
-                      <Text></Text>
-                    </Card>
+                      <Text style={{color: 'white'}}>sp</Text>
+                      <Text key={key} style={{flex: 1, flexWrap: 'wrap'}}>{data.overview}</Text>
                   </View>
-                );
-            })}
+                  <View style={styles.buttonCluster}>
+                    <Button 
+                    title="Details" 
+                    icon={{
+                      name: 'expand',
+                      type: 'font-awesome',
+                      size: 15,
+                      color: 'white',
+                    }}
+                    iconRight
+                    iconContainerStyle={{ marginLeft: 10 }}
+                    titleStyle={{ fontWeight: '700' }}
+                    buttonStyle={{
+                      backgroundColor: '#147efb',
+                      borderColor: 'transparent',
+                      borderWidth: 0,
+                    }}
+                    containerStyle={{
+                      width: 130,
+                    }}
+                    onPress={() => navigation.navigate('Details', 
+                    { genre_ids : data.genre_ids, id : data.id })}/>
+                    <Button
+                      title="Remove"
+                      icon={{
+                        name: 'remove',
+                        type: 'font-awesome',
+                        size: 15,
+                        color: 'white',
+                      }}
+                      iconRight
+                      iconContainerStyle={{ marginLeft: 10 }}
+                      titleStyle={{ fontWeight: '700' }}
+                      buttonStyle={{
+                        backgroundColor: '#fc3d39',
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                      }}
+                      containerStyle={{
+                        width: 130,
+                      }}
+                      onPress={() => removeEntry(String(user?.uid),key)
+                      }
+                      />
+                  </View>
+                </Card>
+              );
+          })}
       </ScrollView>
     </View>
+    
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
+  userBar: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    justifyContent: 'space-around',
+    padding: 20,
+    paddingBottom: 10,
+  },
+  inputBar: {
+    backgroundColor: '#FAF7F6',
+    flex: 1,
+  },
+  movieCard: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 15,
+  },
   movieposter: {
-    width: 200,
-    height: 270,
+    width: 120,
+    height: 170,
   },
   movieTitle: {
     fontSize: 20,
     fontWeight: 'bold',
   },
-  moviecard: {
-  },
-  searchBar: {
-    backgroundColor: 'white',
-    padding: 20,
-  },
-  searchButton: {
-  },
-  overview: {
+  buttonCluster: {
+    flex: 1, 
     flexDirection: 'row',
-  },
+    paddingTop: 5,
+    paddingBottom: 5,
+    justifyContent: 'space-around'
+  }
 });
 
 export default UserProfileScreen;

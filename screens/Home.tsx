@@ -8,7 +8,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Text>This is your homepage</Text>
+        <Text>Rec output Movies will go here</Text>
       </ScrollView>
     </View>
   );

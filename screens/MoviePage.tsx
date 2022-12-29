@@ -147,8 +147,13 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Text>This is your movie page</Text>
-          <Card style={styles.moviecard} elevation={7}>
+          <Card 
+            containerStyle={{
+            display: 'flex',
+            flex:1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            }}>
             <Text>
               <Text style={styles.movieTitle}>{data.title}</Text>
                 {'\n'}{'\n'}
@@ -159,19 +164,45 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
                   />
               <View>
                 <Text></Text>
-                <Text>{data.tagline}</Text>
-                <Text style={styles.overview}>{data.overview}</Text>
-                <Text>Budget: {data.budget}</Text>
-                <Text>Revenue: {data.revenue}</Text>
-                <Text>Popularity: {data.popularity}</Text>
-                <Text>Release date: {data.release_date}</Text>
-                <Text>Runtime: {data.runtime} minutes</Text>
-                <Text>Rating: {data.vote_average}/10</Text>
-                <Text>Voters: {data.vote_count}</Text>
-                <Text>Genres: {convertGenres(String(genre_ids))}</Text>
-                <Text>Movie homepage: {data.homepage}</Text>
+                <Text style={{
+                  fontStyle: 'italic', 
+                  fontSize: 20, 
+                  marginBottom: 15,
+                  fontWeight: 'bold',
+                  }}>{data.tagline}</Text>
+                <Text style={styles.overView}>{data.overview}</Text>
+                <Text style={styles.smallDetails}>
+                  Rating: {data.vote_average}/10{'\n'}{'\n'}
+                  Budget: {data.budget}{'\n'}{'\n'}
+                  Revenue: {data.revenue}{'\n'}{'\n'}
+                  Popularity: {data.popularity}{'\n'}{'\n'}
+                  Release date: {data.release_date}{'\n'}{'\n'}
+                  Runtime: {data.runtime} minutes{'\n'}{'\n'}
+                  Voters: {data.vote_count}{'\n'}{'\n'}
+                  Genres: {convertGenres(String(genre_ids))}{'\n'}{'\n'}
+                  Movie homepage:{'\n'}{data.homepage}
+                </Text>
                 <Button
                   title="Add to watchlist"
+                  icon={{
+                    name: 'add-to-list',
+                    type: 'entypo',
+                    size: 20,
+                    color: 'white',
+                  }}
+                  iconRight
+                  iconContainerStyle={{ marginLeft: 20 }}
+                  titleStyle={{ fontWeight: '700' }}
+                  buttonStyle={{
+                    backgroundColor: '#53d769',
+                    borderColor: 'transparent',
+                    borderWidth: 0,
+                  }}
+                  containerStyle={{
+                    width: 300,
+                    padding: 10,
+                    marginLeft: 13,
+                  }}
                   onPress={() => writeUserData(
                     String(user?.uid),
                     String(user?.email),
@@ -200,30 +231,28 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
-  movieposter: {
-    width: 200,
-    height: 270,
-  },
   movieTitle: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
   },
-  moviecard: {
+  movieposter: {
+    width: 325,
+    height: 443,
   },
-  searchBar: {
-    backgroundColor: 'white',
-    padding: 20,
+  overView: {
+    fontSize: 20,
+    marginBottom: 20
   },
-  searchButton: {
-  },
-  overview: {
-    flexDirection: 'row',
-  },
+  smallDetails: {
+    fontSize: 16,
+    marginBottom: 15
+  }
 });
 
 export default MoviePage;

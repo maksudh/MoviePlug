@@ -4,7 +4,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Card, Button, Icon } from 'react-native-elements';
 import { useState, useEffect } from 'react';
-import { stringLength } from '@firebase/util';
+import { CardDivider } from '@rneui/base/dist/Card/Card.Divider';
 
 const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -30,27 +30,52 @@ const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Text>Current Trending Movies</Text>
           {data.map((data, key) => {
-              return (
-                <View>
-                  <Card style={styles.moviecard} elevation={7}>
-                    <Text key={key}>
-                      <Text style={styles.movieTitle}>{data.title}</Text>
-                        {'\n'}{'\n'}
-                          <Image
-                            resizeMode='cover'
-                            style={styles.movieposter}
-                            source={{uri: posterBaseUrl+data.poster_path}}
-                          />
-                    </Text>
-                    <Text></Text>
-                    <Button title="Open in new page" onPress={() => navigation.navigate('View Recent', 
-                    { genre_ids : data.genre_ids, id : data.id })}/>
-                  </Card>
-                </View>
-              );
-          })}
+                return (
+                  <View style={styles.container}>
+                    <Card containerStyle={{
+                      display: 'flex',
+                      flex:1,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      }}>
+                      <Text key={key}>
+                        <Text style={styles.movieTitle}>{data.title}</Text>
+                          {'\n'}{'\n'}
+                            <Image
+                              resizeMode='cover'
+                              style={styles.movieposter}
+                              source={{uri: posterBaseUrl+data.poster_path}}
+                            />
+                      </Text>
+                      <Text></Text>
+                      <Button 
+                      title="Details" 
+                      icon={{
+                        name: 'expand',
+                        type: 'font-awesome',
+                        size: 15,
+                        color: 'white',
+                      }}
+                      iconRight
+                      iconContainerStyle={{ marginLeft: 10 }}
+                      titleStyle={{ fontWeight: '700' }}
+                      buttonStyle={{
+                        backgroundColor: '#147efb',
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                      }}
+                      containerStyle={{
+                        width: 300,
+                        padding: 5,
+                        marginLeft: 3,
+                      }}
+                      onPress={() => navigation.navigate('Details', 
+                      { genre_ids : data.genre_ids, id : data.id })}/>
+                    </Card>
+                  </View>
+                );
+            })}
       </ScrollView>
     </View>
   );
@@ -60,28 +85,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
-  movieposter: {
-    width: 150,
-    height: 210,
-  },
   movieTitle: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
-  },
-  moviecard: {
   },
   searchBar: {
     backgroundColor: 'white',
     padding: 20,
   },
-  searchButton: {
-  },
-  overview: {
-    flexDirection: 'row',
-  },
+  movieposter: {
+    width: 305,
+    height: 405,
+  }
 });
 
 export default DiscoverScreen;

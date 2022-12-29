@@ -27,9 +27,11 @@ db = firebase.database()
 
 # Reading data --------------------------------------------------------------------------------------------------------------
 
-# emily = db.child("Users").child("FirstPerson").get()
+all_users = db.child("users").get()
 
-# print(emily.val())
+for user in all_users.each():
+    print(user.key())
+    print(user.val())
 
 # Update data --------------------------------------------------------------------------------------------------------------
 
@@ -43,19 +45,19 @@ db = firebase.database()
 
 # db.child("-NK9Lspd7OsuDOFAGSSX").remove()
 
-def jprint(obj):
-    # create a formatted string of the Python JSON object
-    text = json.dumps(obj, sort_keys=True, indent=4)
-    print(text)
+# def jprint(obj):
+#     # create a formatted string of the Python JSON object
+#     text = json.dumps(obj, sort_keys=True, indent=4)
+#     print(text)
 
 # API calls to movieDB ---------------------------------------------------------------------------------------------------------
 
-data = requests.get("https://api.themoviedb.org/3/search/movie?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e&language=en-US&query=batman")
+# data = requests.get("https://api.themoviedb.org/3/search/movie?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e&language=en-US&query=batman")
 
-jdata = data.json()
+# jdata = data.json()
 
 
-db.push({"movies":jdata['results']})
+# db.push({"movies":jdata['results']})
 
 # db.child("-NK9Wr9ZoxkXwCcTN0hP").set({"movies":jdata['results']})
 
