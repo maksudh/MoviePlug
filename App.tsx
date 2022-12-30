@@ -4,6 +4,9 @@ import React from 'react';
 import { ThemeProvider } from '@rneui/themed';
 import './config/firebase';
 import RootNavigation from './navigation';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs();
 
 export default function App() {
   return (
@@ -13,6 +16,5 @@ export default function App() {
     </ThemeProvider>
   );
 }
-
 const styles = StyleSheet.create({
 });

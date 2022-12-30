@@ -7,21 +7,18 @@ import { Button, Card } from 'react-native-elements';
 import { getAuth, signOut} from 'firebase/auth';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import { getDatabase, ref, child, push, get, update, onValue, remove } from "firebase/database";
-import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 const auth = getAuth();
 
-const UserProfileScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+const UserAccount: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const { user } = useAuthentication();
   const db = getDatabase();
   const [data, setData] = useState([]);
   const [moviekeys, setMoviekeys] = useState([]);
-  const posterBaseUrl = "https://image.tmdb.org/t/p/w500"
-
-  // NEED TO MAKE THIS USE EFFECT CANNOT STAY AS A BUTTON 
+  const dbRef = ref(db);
 
   function getUserData(){
-    const dbRef = ref(db);
+    
     get(child(dbRef, 'users/'+String(user?.uid)+'/watchlist'))
     .then((snapshot) => {
       var movies = [];
@@ -50,8 +47,8 @@ const UserProfileScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   // UNCOMMENT THIS WHEN READY TO USE
 
   // useEffect(() => {
-  //   getUserData();
-  // }, [data]);
+  //   setTimeout(getUserData,1000);
+  // },);
 
   return (
     <View style={styles.container}>
@@ -80,73 +77,9 @@ const UserProfileScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         containerStyle={{
           width: 130,
         }}
-        onPress={() => signOut(auth)} />
-        <Button title="L" onPress={() => getUserData()}/>
+        onPress={() => signOut(auth)} 
+        />
       </View>
-      <ScrollView>
-        {data.map((data, key) => {
-              return (
-                <Card>
-                  <Text key={key} style={styles.movieTitle}>{data.title}</Text>
-                  <View style={styles.movieCard}>
-                    <Image
-                        key={key}
-                        resizeMode='cover'
-                        style={styles.movieposter}
-                        source={{uri: posterBaseUrl+data.poster_path}}
-                      />
-                      <Text style={{color: 'white'}}>sp</Text>
-                      <Text key={key} style={{flex: 1, flexWrap: 'wrap'}}>{data.overview}</Text>
-                  </View>
-                  <View style={styles.buttonCluster}>
-                    <Button 
-                    title="Details" 
-                    icon={{
-                      name: 'expand',
-                      type: 'font-awesome',
-                      size: 15,
-                      color: 'white',
-                    }}
-                    iconRight
-                    iconContainerStyle={{ marginLeft: 10 }}
-                    titleStyle={{ fontWeight: '700' }}
-                    buttonStyle={{
-                      backgroundColor: '#147efb',
-                      borderColor: 'transparent',
-                      borderWidth: 0,
-                    }}
-                    containerStyle={{
-                      width: 130,
-                    }}
-                    onPress={() => navigation.navigate('Details', 
-                    { genre_ids : data.genre_ids, id : data.id })}/>
-                    <Button
-                      title="Remove"
-                      icon={{
-                        name: 'remove',
-                        type: 'font-awesome',
-                        size: 15,
-                        color: 'white',
-                      }}
-                      iconRight
-                      iconContainerStyle={{ marginLeft: 10 }}
-                      titleStyle={{ fontWeight: '700' }}
-                      buttonStyle={{
-                        backgroundColor: '#fc3d39',
-                        borderColor: 'transparent',
-                        borderWidth: 0,
-                      }}
-                      containerStyle={{
-                        width: 130,
-                      }}
-                      onPress={() => removeEntry(String(user?.uid),key)
-                      }
-                      />
-                  </View>
-                </Card>
-              );
-          })}
-      </ScrollView>
     </View>
     
   );
@@ -197,4 +130,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default UserProfileScreen;
+export default UserAccount;

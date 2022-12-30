@@ -35,7 +35,6 @@ const SignUpScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Signup screen!</Text>
 
       {!!value.error && <View style={styles.error}><Text>{value.error}</Text></View>}
 
@@ -44,7 +43,7 @@ const SignUpScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           placeholder='Email'
           value={value.email}
           onChangeText={(text) => setValue({ ...value, email: text })}
-          style={styles.input}
+          style={styles.inputBar}
         />
 
         <TextInput
@@ -52,10 +51,24 @@ const SignUpScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           value={value.password}
           onChangeText={(text) => setValue({ ...value, password: text })}
           secureTextEntry={true}
-          style={styles.input}
+          style={styles.inputBar}
         />
 
-        <Button title="Sign up" buttonStyle={styles.control} onPress={signUp} />
+        <Button 
+        title="Sign up" 
+        buttonStyle={{
+          backgroundColor: '#03BEFF',
+          borderWidth: 2,
+          borderColor: 'white',
+          borderRadius: 30,
+        }}
+        containerStyle={{
+          width: 250,
+          marginHorizontal: 50,
+          marginVertical: 10,
+        }}
+        titleStyle={{ fontWeight: 'bold' }} 
+        onPress={signUp} />
       </View>
     </View>
   );
@@ -69,11 +82,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   controls: {
     flex: 1,
   },
-
   input: {
     backgroundColor: 'white',
     paddingHorizontal: 15,
@@ -81,17 +92,22 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 5,
   },
-
   control: {
     marginTop: 10
   },
-
   error: {
     marginTop: 10,
     padding: 10,
     color: '#fff',
     backgroundColor: '#D54826FF',
-  }
+  },
+  inputBar: {
+    backgroundColor: '#FAF7F6',
+    borderRadius: 30,
+    height: 45,
+    margin: 10,
+    padding: 15,
+  },
 });
 
 export default SignUpScreen;

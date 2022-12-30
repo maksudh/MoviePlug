@@ -1,12 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { Button } from 'react-native-elements';
 
 
 import HomeScreen from '../screens/Home';
-import UserProfileScreen from '../screens/UserProfile';
 import SearchScreen from '../screens/SearchScreen';
 import DiscoverScreen from '../screens/Discover';
+import WatchListcreen from '../screens/WatchList';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,11 +18,11 @@ export default function UserTabs() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'Home') {
+          if (route.name === 'For you') {
             iconName = focused
               ? 'ios-home'
               : 'ios-home-outline';
-            } else if (route.name === 'User Profile') {
+            } else if (route.name === 'Watch list') {
               iconName = focused ? 'ios-list' : 'ios-list-outline';
             }
               else if (route.name === 'Discover') {
@@ -37,7 +38,7 @@ export default function UserTabs() {
       })}
       >
         <Tab.Screen 
-        name="Home" 
+        name="For you" 
         component={HomeScreen} 
         />
         <Tab.Screen 
@@ -49,8 +50,8 @@ export default function UserTabs() {
         component={SearchScreen}
         />
         <Tab.Screen 
-        name="User Profile" 
-        component={UserProfileScreen}
+        name="Watch list" 
+        component={WatchListcreen}
         />
       </Tab.Navigator>
   );

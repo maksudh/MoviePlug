@@ -6,11 +6,39 @@ import { Button } from 'react-native-elements';
 const WelcomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Welcome screen!</Text>
-
       <View style={styles.buttons}>
-        <Button title="Sign in" buttonStyle={styles.button} onPress={() => navigation.navigate('Sign In')} />
-        <Button title="Sign up" type="outline" buttonStyle={styles.button} onPress={() => navigation.navigate('Sign Up')} />
+        <Button 
+        title="Sign in" 
+        buttonStyle={{
+          backgroundColor: '#03BEFF',
+          borderWidth: 2,
+          borderColor: 'white',
+          borderRadius: 30,
+        }}
+        containerStyle={{
+          width: 250,
+          marginHorizontal: 50,
+          marginVertical: 10,
+        }}
+        titleStyle={{ fontWeight: 'bold' }} 
+        onPress={() => navigation.navigate('Sign In')} 
+        />
+        <Button 
+        title="Sign up" 
+        buttonStyle={{
+          backgroundColor: '#7E7E7E',
+          borderWidth: 2,
+          borderColor: 'white',
+          borderRadius: 30,
+        }}
+        containerStyle={{
+          width: 250,
+          marginHorizontal: 50,
+          marginVertical: 10,
+        }}
+        titleStyle={{ fontWeight: 'bold' }} 
+        onPress={() => navigation.navigate('Sign Up')} 
+        />
       </View>
     </View>
   );
@@ -24,14 +52,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-  buttons: {
-    flex: 1,
-  },
-
-  button: {
-    marginTop: 10
-  }
 });
 
 export default WelcomeScreen;

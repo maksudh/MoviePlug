@@ -6,9 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Button, Card } from 'react-native-elements';
 import { getAuth } from 'firebase/auth';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
-import { FeedLabel } from 'semantic-ui-react';
-import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
-import { CardDivider } from '@rneui/base/dist/Card/Card.Divider';
+import { Searchbar } from 'react-native-paper';
 
 const auth = getAuth();
 const url = "https://api.themoviedb.org/3/search/movie?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e&query=";
@@ -16,7 +14,7 @@ const url = "https://api.themoviedb.org/3/search/movie?api_key=a74bbbe22b9c0d64a
 const SearchScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => { 
   const { user } = useAuthentication();
   const [data, setData] = useState([]);
-  const [searchterm, setSearchterm] = useState("Batman");
+  const [searchterm, setSearchterm] = useState("-");
   const posterBaseUrl = "https://image.tmdb.org/t/p/w500"
   const scrollRef = useRef();
 
@@ -27,9 +25,14 @@ const SearchScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     });
   }
 
-  let input = '';
+  let input = '-';
   const saveUserInput = userInput => {
-    input = userInput;
+    if (userInput === ''){
+      return;
+    }
+    else{
+      input = userInput;
+    }
   };
 
   async function fetchData(){
@@ -52,11 +55,11 @@ const SearchScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.searchBar}>
         <TextInput
+          clearButtonMode='always'
           style={styles.inputBar}
           placeholder={'Search Movies'}
           onChangeText={userInput => saveUserInput(userInput)}>
         </TextInput>
-              {/* NEED TO FIX THE SPACES IN SEARCH TOO Fix the no value search bit */}
         <Button  
         icon={{
           name: 'search',
@@ -68,7 +71,7 @@ const SearchScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           backgroundColor: '#5fc9f8',
           borderColor: 'transparent',
           borderWidth: 0,
-          height: 35
+          height: 40
         }}
         containerStyle={{
           width: 70,
@@ -143,10 +146,10 @@ const styles = StyleSheet.create({
   inputBar: {
     backgroundColor: '#FAF7F6',
     flex: 1,
-    borderRadius: 30,
-    height: 45,
-    marginTop: 5,
-    padding: 15,
+    borderRadius: 10,
+    height: 43,
+    marginTop: 9,
+    padding: 10,
   },
   movieCard: {
     display: 'flex',
