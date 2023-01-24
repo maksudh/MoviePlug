@@ -140,7 +140,9 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                       containerStyle={{
                         width: 130,
                       }}
-                      onPress={() => removeEntry(String(user?.uid),key)
+                      onPress={() => {
+                        removeEntry(String(user?.uid),key);
+                      }
                       }
                       />
                   </View>

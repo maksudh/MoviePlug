@@ -2,6 +2,7 @@ import pyrebase;
 import requests;
 import json;
 import pandas as pd; 
+from collections import Counter;
 
 config = {
     "apiKey": "AIzaSyDMioN6rBJCuCI6YoF43BKBUYmjwR_F9pw",
@@ -19,29 +20,28 @@ db = firebase.database()
 
 # No need to touch above code for now 
 
-# Creating data here 
-
-# db.push(data) --------------------------------------------------------------------------------------------------------------
-
-# db.child("Users").child("FirstPerson").set(data)
-
-# Reading data --------------------------------------------------------------------------------------------------------------
-
 all_users = db.child("users").get()
 
 for user in all_users.each():
     print(user.key())
-    print(user.val())
+    usergenres = ""
+    for movie in db.child("users").child(user.key()).child("watchlist").get().each():
+        temp = db.child("users").child(user.key()).child("watchlist").child(movie.key()).child("genre_ids").get().val()
+        usergenres += temp
+        split_genres = usergenres.split(",")
+        res = [eval(i) for i in split_genres]
+    occurence_count = Counter(res)
+    print(occurence_count)
+    firstgenre = sorted(set(occurence_count.keys()), reverse=True)[-1]
+    secondgenre = sorted(set(occurence_count.keys()), reverse=True)[-2]
+    thirdgenre = sorted(set(occurence_count.keys()), reverse=True)[-3]
+    print(firstgenre, secondgenre, thirdgenre)
+    top3generes = [firstgenre, secondgenre, thirdgenre]
+    db.child("users").child(user.key()).child("pref_generes").set(top3generes)
 
-# Update data --------------------------------------------------------------------------------------------------------------
-
-# db.child("Users").child("FirstPerson").update({"Name":"John"})
-
-# Delete data --------------------------------------------------------------------------------------------------------------
-
-# db.child("Users").child("FirstPerson").child("Age").remove()
-
-# db.child("Users").child("FirstPerson").remove()
+    data = requests.get("https://api.themoviedb.org/3/discover/movie?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e&language=en-US&sort_by=popularity.desc&page=1&with_genres="+str(firstgenre)+"&with_watch_monetization_types=flatrate")
+    jdata = data.json()
+    db.child("users").child(user.key()).child("rec_movies").set(jdata['results'])
 
 # db.child("-NK9Lspd7OsuDOFAGSSX").remove()
 
@@ -52,12 +52,9 @@ for user in all_users.each():
 
 # API calls to movieDB ---------------------------------------------------------------------------------------------------------
 
-# data = requests.get("https://api.themoviedb.org/3/search/movie?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e&language=en-US&query=batman")
-
-# jdata = data.json()
 
 
-# db.push({"movies":jdata['results']})
+
 
 # db.child("-NK9Wr9ZoxkXwCcTN0hP").set({"movies":jdata['results']})
 

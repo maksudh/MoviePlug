@@ -4,11 +4,9 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Card, Button, Icon } from 'react-native-elements';
 import { useState, useEffect } from 'react';
-import { CardDivider } from '@rneui/base/dist/Card/Card.Divider';
 
 const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [data, setData] = useState([]);
-  const [shouldShow, setShouldShow] = useState(false);
   const posterBaseUrl = "https://image.tmdb.org/t/p/w500"
   
   async function fetchData(){
