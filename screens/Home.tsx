@@ -11,7 +11,6 @@ import { getDatabase, ref, child, push, get, update, onValue, remove } from "fir
 const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   
   const [data, setData] = useState([]);
-  const [g , setG] = useState([]);
   const posterBaseUrl = "https://image.tmdb.org/t/p/w500"
   const { user } = useAuthentication();
   const db = getDatabase();
@@ -32,10 +31,11 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     });
   }
 
-
+// Change back to realtime when ready
   useEffect(() => {
-    setTimeout(getUserData,1000);
-  },);
+    // setTimeout(getUserData,1000);
+    getUserData();
+  },[]);
 
   return (
     <View style={styles.container}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View , Image} from 'react-native';
+import { StyleSheet, Text, View , Image, Alert} from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -48,15 +48,28 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
       vote_average : vote_average,
       vote_count :vote_count
     }
-    const newEntryKey = push(child(ref(db, 'users/'+userId), 'watchlist')).key
+    // const newEntryKey = push(child(ref(db, 'users/'+userId), 'watchlist')).key
     const updates ={}
 
     update(ref(db, 'users/'+userId),{
       email: email,
     });
 
-    updates['/watchlist/'+newEntryKey] = movieEntry;
+    // updates['/watchlist/'+newEntryKey] = movieEntry;
+    updates['/watchlist/'+id] = movieEntry;
     return update(ref(db, 'users/'+userId),updates);
+  }
+
+  function likeMovie(id){
+    const db = getDatabase();
+    const liked = { liked : "true"}
+    update(ref(db, 'users/'+user?.uid+'/watchlist/'+id),liked)
+  }
+
+  function dislikeMovie(id){
+    const db = getDatabase();
+    const liked = { liked : "false"}
+    update(ref(db, 'users/'+user?.uid+'/watchlist/'+id),liked)
   }
   
   function convertGenres(genre_ids){
@@ -140,6 +153,21 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
       });
   };
 
+  const addedalert = (title) =>
+  Alert.alert('Added '+title+' to watchlist!', '', [
+    {text: 'OK', onPress: () => console.log('OK Pressed')},
+  ]);
+
+  const likedalert = (title) =>
+  Alert.alert('You liked '+title+'!', '', [
+    {text: 'OK', onPress: () => console.log('OK Pressed')},
+  ]);
+
+  const dislikedalert = (title) =>
+  Alert.alert('You disliked '+title+'!', '', [
+    {text: 'OK', onPress: () => console.log('OK Pressed')},
+  ]);
+
   useEffect(() => {
     fetchData();
   }, [id]);
@@ -203,7 +231,7 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
                     padding: 10,
                     marginLeft: 13,
                   }}
-                  onPress={() => writeUserData(
+                  onPress={() => {writeUserData(
                     String(user?.uid),
                     String(user?.email),
                     String(data.adult),
@@ -219,7 +247,62 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
                     String(data.video),
                     String(data.vote_average),
                     String(data.vote_count)
-                    )}
+                    );
+                    addedalert(String(data.title));
+                  }
+                  }
+                />
+                <Button
+                  title="Like movie"
+                  icon={{
+                    name: 'thumbs-up',
+                    type: 'font-awesome',
+                    size: 20,
+                    color: 'white',
+                  }}
+                  iconRight
+                  iconContainerStyle={{ marginLeft: 20 }}
+                  titleStyle={{ fontWeight: '700' }}
+                  buttonStyle={{
+                    backgroundColor: '#e2f11a',
+                    borderColor: 'transparent',
+                    borderWidth: 0,
+                  }}
+                  containerStyle={{
+                    width: 300,
+                    padding: 10,
+                    marginLeft: 13,
+                  }}
+                  onPress={() => {
+                    likeMovie(String(data.id));
+                    likedalert(String(data.title));
+                  }}
+                />
+                <Button
+                  title="Dislike movie"
+                  icon={{
+                    name: 'thumbs-down',
+                    type: 'font-awesome',
+                    size: 20,
+                    color: 'white',
+                  }}
+                  iconRight
+                  iconContainerStyle={{ marginLeft: 20 }}
+                  titleStyle={{ fontWeight: '700' }}
+                  buttonStyle={{
+                    backgroundColor: '#da0610',
+                    borderColor: 'transparent',
+                    borderWidth: 0,
+                  }}
+                  containerStyle={{
+                    width: 300,
+                    padding: 10,
+                    marginLeft: 13,
+                  }}
+                  onPress={() => {
+                    dislikeMovie(String(data.id));
+                    dislikedalert(String(data.title));
+                  }}
                 />
               </View>
             </Text>
