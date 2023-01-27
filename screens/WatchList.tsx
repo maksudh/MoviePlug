@@ -18,8 +18,6 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const posterBaseUrl = "https://image.tmdb.org/t/p/w500"
   const dbRef = ref(db);
 
-  // NEED TO MAKE THIS USE EFFECT CANNOT STAY AS A BUTTON 
-
   function getUserData(){
     
     get(child(dbRef, 'users/'+String(user?.uid)+'/watchlist'))
@@ -46,8 +44,6 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       remove(ref(db, 'users/'+userId+'/watchlist/'+Object.keys(moviekeys)[key]));
     });
   };
-
-  // UNCOMMENT THIS WHEN READY TO USE
 
   useEffect(() => {
     setTimeout(getUserData,1000);
