@@ -274,6 +274,23 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
                     marginLeft: 13,
                   }}
                   onPress={() => {
+                    writeUserData(
+                      String(user?.uid),
+                      String(user?.email),
+                      String(data.adult),
+                      String(data.backdrop_path),
+                      String(genre_ids),
+                      String(data.id),
+                      String(data.original_language),
+                      String(data.overview),
+                      String(data.popularity),
+                      String(data.poster_path),
+                      String(data.release_date),
+                      String(data.title),
+                      String(data.video),
+                      String(data.vote_average),
+                      String(data.vote_count)
+                      );
                     likeMovie(String(data.id));
                     likedalert(String(data.title));
                   }}
@@ -300,6 +317,23 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
                     marginLeft: 13,
                   }}
                   onPress={() => {
+                    writeUserData(
+                      String(user?.uid),
+                      String(user?.email),
+                      String(data.adult),
+                      String(data.backdrop_path),
+                      String(genre_ids),
+                      String(data.id),
+                      String(data.original_language),
+                      String(data.overview),
+                      String(data.popularity),
+                      String(data.poster_path),
+                      String(data.release_date),
+                      String(data.title),
+                      String(data.video),
+                      String(data.vote_average),
+                      String(data.vote_count)
+                      );
                     dislikeMovie(String(data.id));
                     dislikedalert(String(data.title));
                   }}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View ,TextInput, Image} from 'react-native';
+import { StyleSheet, Text, View ,Alert, Image} from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -19,34 +19,32 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const dbRef = ref(db);
 
   function getUserData(){
-    
     get(child(dbRef, 'users/'+String(user?.uid)+'/watchlist'))
     .then((snapshot) => {
       var movies = [];
-
       snapshot.forEach(snapshot => {
         movies.push(snapshot.val());
       });
       setData(movies)
-      console.log(data)
+      // console.log(data)
+      console.log("Updating...")
     });
   }
 
-  function removeEntry(userId, key){
+  function removeEntryFixed(userId, key){
+    const dfRef = ref(db);
+    remove(ref(db, 'users/'+userId+'/watchlist/'+key));
+  }
 
-    const dbRef = ref(db);
-    get(child(dbRef, 'users/'+String(user?.uid)+'/watchlist'))
-    .then((snapshot) => {
-      const keys = snapshot.val();
-      setMoviekeys(keys)
-      // console.log(moviekeys)
-      // console.log(Object.keys(moviekeys))
-      remove(ref(db, 'users/'+userId+'/watchlist/'+Object.keys(moviekeys)[key]));
-    });
-  };
+  const addedalert = (title) =>
+  Alert.alert('Removed '+title+' from watchlist!', '', [
+    {text: 'OK', onPress: () => console.log('OK Pressed')},
+  ]);
 
-  useEffect(() => {
-    setTimeout(getUserData,1000);
+  useEffect(() => {  
+    setTimeout(() => {
+      getUserData();
+    }, 1000);
   },);
 
   return (
@@ -137,7 +135,8 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                         width: 130,
                       }}
                       onPress={() => {
-                        removeEntry(String(user?.uid),key);
+                        removeEntryFixed(user?.uid,data.id);
+                        addedalert(String(data.title));
                       }
                       }
                       />

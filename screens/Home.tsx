@@ -61,7 +61,6 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     .then((data) => {
       data = data.results.slice(0,5);
       setRec1(data);
-      console.log(rec1);
     })
     .catch((error) => {
         console.log(error)
@@ -74,7 +73,6 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     .then((data) => {
       data = data.results.slice(0,5);
       setRec2(data);
-      console.log(rec2);
     })
     .catch((error) => {
         console.log(error)
@@ -87,7 +85,6 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     .then((data) => {
       data = data.results.slice(0,5);
       setRec3(data);
-      console.log(rec3);
     })
     .catch((error) => {
         console.log(error)
@@ -100,20 +97,22 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
 // Change back to realtime when ready
   useEffect(() => {
-    // getUserData();
-    // getLikedMovies();
-    // getMovieTitles();
-    // fetchData();
-    // fetchData2();
-    // fetchData3();
-    // console.log("use effect runs")
-  },[]);
+    setTimeout(() => {
+      getUserData();
+      getLikedMovies();
+      getMovieTitles();
+      fetchData();
+      fetchData2();
+      fetchData3();
+      console.log("use effect runs")
+    }, 1000);
+  },[liked]);
 
   return (
     <View style={styles.container}>
       <ScrollView>
       <Suspense fallback={<Loading />}>
-      <Button
+      {/* <Button
         title="Load data"
         onPress={() => {    
           getUserData();
@@ -124,7 +123,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           fetchData3();
           console.log("use effect runs")}
         }
-        />
+        /> */}
         <Text style={styles.scrollTitle}>Recommended Movies</Text>
         <ScrollView horizontal={true}>
           {data.map((data, key) => {
