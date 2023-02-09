@@ -82,7 +82,11 @@ const SearchScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           onPressTouch();
           }}/>
       </View>
-      <ScrollView ref={scrollRef}>
+      <ScrollView 
+      ref={scrollRef}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
+      >
           {data.map((data, key) => {
               return (
                 <Card>
@@ -141,7 +145,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     padding: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
+    marginLeft: 10,
   },
   inputBar: {
     backgroundColor: '#FAF7F6',
@@ -150,6 +155,7 @@ const styles = StyleSheet.create({
     height: 43,
     marginTop: 9,
     padding: 10,
+    paddingLeft: 15,
   },
   movieCard: {
     display: 'flex',

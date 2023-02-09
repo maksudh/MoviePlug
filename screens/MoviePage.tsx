@@ -174,7 +174,10 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
           <Card 
             containerStyle={{
             display: 'flex',

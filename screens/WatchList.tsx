@@ -52,7 +52,6 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       <View style={styles.userBar}>
         <Text style={{
           fontSize: 18,
-          marginTop: 7
           }}>{user?.email}</Text>
         <Button 
         title="Settings"
@@ -78,7 +77,10 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         />
         {/* <Button title="L" onPress={() => getUserData()}/> */}
       </View>
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
         {data.map((data, key) => {
               return (
                 <Card>

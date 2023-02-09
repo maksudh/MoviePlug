@@ -27,7 +27,10 @@ const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
           {data.map((data, key) => {
                 return (
                   <View style={styles.container}>
