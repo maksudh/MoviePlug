@@ -59,7 +59,7 @@ const SignUpScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         buttonStyle={{
           backgroundColor: '#03BEFF',
           borderWidth: 2,
-          borderColor: 'white',
+          borderColor: '#232b2b',
           borderRadius: 30,
         }}
         containerStyle={{
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#232b2b',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#D54826FF',
   },
   inputBar: {
-    backgroundColor: '#FAF7F6',
+    backgroundColor: '#414a4c',
+    color: 'white',
     borderRadius: 30,
     height: 45,
     margin: 10,

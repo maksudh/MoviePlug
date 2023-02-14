@@ -11,7 +11,15 @@ const Stack = createStackNavigator();
 export default function UserStack() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#232b2b',
+              },
+              headerTitleStyle: {
+                color: 'white'
+              },
+            }}>
         <Stack.Screen 
         options={{headerShown: false}} 
         name="main" 

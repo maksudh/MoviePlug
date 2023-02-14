@@ -7,6 +7,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { getAuth, signOut} from 'firebase/auth';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import { getDatabase, ref, child, push, get, update, onValue, remove } from "firebase/database";
+import { StatusBar } from 'expo-status-bar';
 
 const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   
@@ -114,6 +115,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="light"/>
       <ScrollView
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
@@ -143,6 +145,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                       flex:1,
                       alignItems: 'center',
                       justifyContent: 'center',
+                      backgroundColor: '#232b2b',
+                      borderColor: 'black'
                       }}>
                       <Text key={key}>
                         <Text style={styles.movieTitle}>{data.title}</Text>
@@ -195,6 +199,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           flex:1,
                           alignItems: 'center',
                           justifyContent: 'center',
+                          backgroundColor: '#232b2b',
+                          borderColor: 'black'
                           }}>
                           <Text key={key}>
                             <Text style={styles.movieTitle}>{data.title}</Text>
@@ -249,6 +255,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           flex:1,
                           alignItems: 'center',
                           justifyContent: 'center',
+                          backgroundColor: '#232b2b',
+                          borderColor: 'black'
                           }}>
                           <Text key={key}>
                             <Text style={styles.movieTitle}>{data.title}</Text>
@@ -295,6 +303,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           flex:1,
                           alignItems: 'center',
                           justifyContent: 'center',
+                          backgroundColor: '#232b2b',
+                          borderColor: 'black'
                           }}>
                           <Text key={key}>
                             <Text style={styles.movieTitle}>{data.title}</Text>
@@ -341,6 +351,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           flex:1,
                           alignItems: 'center',
                           justifyContent: 'center',
+                          backgroundColor: '#232b2b',
+                          borderColor: 'black'
                           }}>
                           <Text key={key}>
                             <Text style={styles.movieTitle}>{data.title}</Text>
@@ -389,19 +401,21 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0e1111',
     alignItems: 'stretch',
     justifyContent: 'center',
   },
   movieTitle: {
     fontSize: 15,
     fontWeight: 'bold',
+    color: 'white'
   },
   scrollTitle: {
     margin: 15,
     marginBottom: 5,
     fontSize: 25,
     fontWeight: 'bold',
+    color: 'white',
   },
   searchBar: {
     backgroundColor: 'white',

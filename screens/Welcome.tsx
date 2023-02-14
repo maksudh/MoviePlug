@@ -12,7 +12,7 @@ const WelcomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         buttonStyle={{
           backgroundColor: '#03BEFF',
           borderWidth: 2,
-          borderColor: 'white',
+          borderColor: '#232b2b',
           borderRadius: 30,
         }}
         containerStyle={{
@@ -28,7 +28,7 @@ const WelcomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         buttonStyle={{
           backgroundColor: '#7E7E7E',
           borderWidth: 2,
-          borderColor: 'white',
+          borderColor: '#232b2b',
           borderRadius: 30,
         }}
         containerStyle={{
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#232b2b',
     alignItems: 'center',
     justifyContent: 'center',
   },

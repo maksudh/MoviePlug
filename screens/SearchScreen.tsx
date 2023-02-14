@@ -89,7 +89,11 @@ const SearchScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       >
           {data.map((data, key) => {
               return (
-                <Card>
+                <Card 
+                  containerStyle={{
+                  backgroundColor: '#232b2b',
+                  borderColor: 'black'
+                  }}>
                   <Text key={key} style={styles.movieTitle}>{data.title}</Text>
                   <View style={styles.movieCard}>
                     <Image
@@ -98,8 +102,8 @@ const SearchScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                         style={styles.movieposter}
                         source={{uri: posterBaseUrl+data.poster_path}}
                       />
-                      <Text style={{color: 'white'}}>sp</Text>
-                      <Text key={key} style={{flex: 1, flexWrap: 'wrap'}}>{data.overview}</Text>
+                      <Text style={{color: '#232b2b'}}>sp</Text>
+                      <Text key={key} style={{flex: 1, flexWrap: 'wrap', color: 'white'}}>{data.overview}</Text>
                   </View>
                   <Button 
                   title="Details" 
@@ -136,20 +140,21 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0e1111',
     alignItems: 'stretch',
     justifyContent: 'center',
   },
   searchBar: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#0e1111',
     padding: 10,
     paddingBottom: 10,
     marginLeft: 10,
   },
   inputBar: {
-    backgroundColor: '#FAF7F6',
+    backgroundColor: '#414a4c',
+    color: 'white',
     flex: 1,
     borderRadius: 10,
     height: 43,
@@ -172,6 +177,7 @@ const styles = StyleSheet.create({
   movieTitle: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: 'white'
   },
 });
 

@@ -2,8 +2,6 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Button } from 'react-native-elements';
-
-
 import HomeScreen from '../screens/Home';
 import SearchScreen from '../screens/SearchScreen';
 import DiscoverScreen from '../screens/Discover';
@@ -15,6 +13,16 @@ export default function UserTabs() {
   return (
       <Tab.Navigator
       screenOptions={({ route }) => ({
+          headerStyle: {
+            backgroundColor: '#0e1111',
+            
+          },
+          tabBarStyle: {
+            backgroundColor: '#0e1111',
+          },
+          headerTitleStyle: {
+            color: 'white'
+          },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
@@ -33,8 +41,8 @@ export default function UserTabs() {
             }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        // tabBarActiveTintColor: 'tomato',
-        // tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: '#147efb',
+        tabBarInactiveTintColor: 'white',
       })}
       >
         <Tab.Screen 

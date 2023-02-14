@@ -7,6 +7,8 @@ import { Button, Card } from 'react-native-elements';
 import { getDatabase, ref, child, push, update } from "firebase/database";
 import { getAuth } from 'firebase/auth';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
+import { color } from '@rneui/base';
+import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
   const { user } = useAuthentication();
@@ -184,6 +186,8 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
             flex:1,
             alignItems: 'center',
             justifyContent: 'center',
+            backgroundColor: '#232b2b',
+            borderColor: '#232b2b'
             }}>
             <Text>
               <Text style={styles.movieTitle}>{data.title}</Text>
@@ -200,6 +204,7 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
                   fontSize: 20, 
                   marginBottom: 15,
                   fontWeight: 'bold',
+                  color: 'white'
                   }}>{data.tagline}</Text>
                 <Text style={styles.overView}>{data.overview}</Text>
                 <Text style={styles.smallDetails}>
@@ -353,13 +358,14 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#232b2b',
     alignItems: 'stretch',
     justifyContent: 'center',
   },
   movieTitle: {
     fontSize: 30,
     fontWeight: 'bold',
+    color: 'white',
   },
   movieposter: {
     width: 325,
@@ -367,11 +373,13 @@ const styles = StyleSheet.create({
   },
   overView: {
     fontSize: 20,
-    marginBottom: 20
+    marginBottom: 20,
+    color: 'white'
   },
   smallDetails: {
     fontSize: 16,
-    marginBottom: 15
+    marginBottom: 15,
+    color: 'white'
   }
 });
 

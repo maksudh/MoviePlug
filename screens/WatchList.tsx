@@ -7,6 +7,7 @@ import { Button, Card } from 'react-native-elements';
 import { getAuth, signOut} from 'firebase/auth';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import { getDatabase, ref, child, push, get, update, onValue, remove } from "firebase/database";
+import { color } from '@rneui/base';
 
 const auth = getAuth();
 
@@ -52,6 +53,7 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       <View style={styles.userBar}>
         <Text style={{
           fontSize: 18,
+          color: 'white'
           }}>{user?.email}</Text>
         <Button 
         title="Settings"
@@ -83,7 +85,11 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       >
         {data.map((data, key) => {
               return (
-                <Card>
+                <Card
+                  containerStyle={{
+                  backgroundColor: '#232b2b',
+                  borderColor: 'black'
+                  }}>
                   <Text key={key} style={styles.movieTitle}>{data.title}</Text>
                   <View style={styles.movieCard}>
                     <Image
@@ -92,8 +98,8 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                         style={styles.movieposter}
                         source={{uri: posterBaseUrl+data.poster_path}}
                       />
-                      <Text style={{color: 'white'}}>sp</Text>
-                      <Text key={key} style={{flex: 1, flexWrap: 'wrap'}}>{data.overview}</Text>
+                      <Text style={{color: '#232b2b'}}>sp</Text>
+                      <Text key={key} style={{flex: 1, flexWrap: 'wrap', color: 'white'}}>{data.overview}</Text>
                   </View>
                   <View style={styles.buttonCluster}>
                     <Button 
@@ -156,14 +162,15 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0e1111',
     alignItems: 'stretch',
     justifyContent: 'center',
   },
   userBar: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#0e1111',
+    color: '#0e1111',
     justifyContent: 'space-around',
     padding: 20,
     paddingBottom: 10,
@@ -187,13 +194,14 @@ const styles = StyleSheet.create({
   movieTitle: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: 'white'
   },
   buttonCluster: {
     flex: 1, 
     flexDirection: 'row',
     paddingTop: 5,
     paddingBottom: 5,
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   }
 });
 

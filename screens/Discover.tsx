@@ -39,6 +39,8 @@ const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                       flex:1,
                       alignItems: 'center',
                       justifyContent: 'center',
+                      backgroundColor: '#232b2b',
+                      borderColor: 'black'
                       }}>
                       <Text key={key}>
                         <Text style={styles.movieTitle}>{data.title}</Text>
@@ -85,13 +87,14 @@ const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0e1111',
     alignItems: 'stretch',
     justifyContent: 'center',
   },
   movieTitle: {
     fontSize: 30,
     fontWeight: 'bold',
+    color: 'white',
   },
   searchBar: {
     backgroundColor: 'white',
