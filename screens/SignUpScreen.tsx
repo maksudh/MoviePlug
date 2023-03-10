@@ -41,6 +41,7 @@ const SignUpScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       <View style={styles.controls}>
         <TextInput
           placeholder='Email'
+          placeholderTextColor="#c9c9c9"
           value={value.email}
           onChangeText={(text) => setValue({ ...value, email: text })}
           style={styles.inputBar}
@@ -48,6 +49,7 @@ const SignUpScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         <TextInput
           placeholder='Password'
+          placeholderTextColor="#c9c9c9"
           value={value.password}
           onChangeText={(text) => setValue({ ...value, password: text })}
           secureTextEntry={true}

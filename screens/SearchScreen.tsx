@@ -58,6 +58,7 @@ const SearchScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           clearButtonMode='always'
           style={styles.inputBar}
           placeholder={'Search Movies'}
+          placeholderTextColor="#c9c9c9"
           onChangeText={userInput => saveUserInput(userInput)}>
         </TextInput>
         <Button  

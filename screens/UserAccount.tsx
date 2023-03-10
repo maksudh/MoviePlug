@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   userBar: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#232b2b',
     justifyContent: 'space-around',
     padding: 20,
     paddingBottom: 10,

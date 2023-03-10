@@ -146,7 +146,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                       alignItems: 'center',
                       justifyContent: 'center',
                       backgroundColor: '#232b2b',
-                      borderColor: 'black'
+                      borderColor: 'black',
+                      width: 260,
                       }}>
                       <Text key={key}>
                         <Text style={styles.movieTitle}>{data.title}</Text>
@@ -200,7 +201,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           alignItems: 'center',
                           justifyContent: 'center',
                           backgroundColor: '#232b2b',
-                          borderColor: 'black'
+                          borderColor: 'black',
+                          width: 260,
                           }}>
                           <Text key={key}>
                             <Text style={styles.movieTitle}>{data.title}</Text>
@@ -256,7 +258,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           alignItems: 'center',
                           justifyContent: 'center',
                           backgroundColor: '#232b2b',
-                          borderColor: 'black'
+                          borderColor: 'black',
+                          width: 260,
                           }}>
                           <Text key={key}>
                             <Text style={styles.movieTitle}>{data.title}</Text>
@@ -304,7 +307,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           alignItems: 'center',
                           justifyContent: 'center',
                           backgroundColor: '#232b2b',
-                          borderColor: 'black'
+                          borderColor: 'black',
+                          width: 260,
                           }}>
                           <Text key={key}>
                             <Text style={styles.movieTitle}>{data.title}</Text>
@@ -352,7 +356,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           alignItems: 'center',
                           justifyContent: 'center',
                           backgroundColor: '#232b2b',
-                          borderColor: 'black'
+                          borderColor: 'black',
+                          width: 260,
                           }}>
                           <Text key={key}>
                             <Text style={styles.movieTitle}>{data.title}</Text>

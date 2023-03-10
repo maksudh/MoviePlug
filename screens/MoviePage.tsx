@@ -5,16 +5,16 @@ import { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button, Card } from 'react-native-elements';
 import { getDatabase, ref, child, push, update } from "firebase/database";
-import { getAuth } from 'firebase/auth';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
-import { color } from '@rneui/base';
-import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
+import YoutubePlayer from 'react-native-youtube-iframe';
+
 
 const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
   const { user } = useAuthentication();
   // const [data, setData] = useState([]);
   const posterBaseUrl = "https://image.tmdb.org/t/p/w500"
   const [data, setData] = useState([]);
+  const [video, setVideo] = useState([]);
   const { genre_ids, id } = route.params; 
 
   function writeUserData(
@@ -155,6 +155,18 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
       });
   };
 
+  function getVideo(){
+    fetch("https://api.themoviedb.org/3/movie/" + id + "/videos?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e&language=en-US")
+    .then((response) => response.json())
+    .then((data) => {
+      setVideo(data.results[0].key);
+      console.log(data);
+    })
+    .catch((error) => {
+        console.log(error)
+      });
+  };
+
   const addedalert = (title) =>
   Alert.alert('Added '+title+' to watchlist!', '', [
     {text: 'OK', onPress: () => console.log('OK Pressed')},
@@ -172,6 +184,7 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
 
   useEffect(() => {
     fetchData();
+    getVideo();
   }, [id]);
 
   return (
@@ -206,6 +219,14 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
                   fontWeight: 'bold',
                   color: 'white'
                   }}>{data.tagline}</Text>
+                <View>
+                  <YoutubePlayer
+                  height={210}
+                  play={true}
+                  // videoId={String(video[0].id)}
+                  videoId={String(video)}
+                  />
+                </View>
                 <Text style={styles.overView}>{data.overview}</Text>
                 <Text style={styles.smallDetails}>
                   Rating: {data.vote_average}/10{'\n'}{'\n'}

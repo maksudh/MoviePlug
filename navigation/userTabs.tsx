@@ -15,7 +15,6 @@ export default function UserTabs() {
       screenOptions={({ route }) => ({
           headerStyle: {
             backgroundColor: '#0e1111',
-            
           },
           tabBarStyle: {
             backgroundColor: '#0e1111',
