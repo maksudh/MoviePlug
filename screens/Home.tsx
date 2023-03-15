@@ -111,7 +111,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       fetchData3();
       console.log("use effect runs")
     }, 1000);
-  },[]);
+  },[liked]);
 
   return (
     <View style={styles.container}>
@@ -121,7 +121,23 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         showsHorizontalScrollIndicator={false}
       >
       <Button
-        title="Load data"
+        title = 'Load Data'
+        icon={{
+          name: 'refresh',
+          type: 'font-awesome',
+          size: 20,
+          color: 'white',
+        }}
+        buttonStyle={{
+          backgroundColor: '#99aab5',
+          borderColor: 'transparent',
+          borderWidth: 0,
+          height: 40
+        }}
+        containerStyle={{
+          width: 390,
+          padding: 20,
+        }}
         onPress={() => {    
           getUserData();
           getLikedData();

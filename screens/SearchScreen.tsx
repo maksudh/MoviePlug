@@ -14,7 +14,7 @@ const url = "https://api.themoviedb.org/3/search/movie?api_key=a74bbbe22b9c0d64a
 const SearchScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => { 
   const { user } = useAuthentication();
   const [data, setData] = useState([]);
-  const [searchterm, setSearchterm] = useState("-");
+  const [searchterm, setSearchterm] = useState("");
   const posterBaseUrl = "https://image.tmdb.org/t/p/w500"
   const scrollRef = useRef();
 
@@ -25,7 +25,7 @@ const SearchScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     });
   }
 
-  let input = '-';
+  let input = searchterm;
   const saveUserInput = userInput => {
     if (userInput === ''){
       return;

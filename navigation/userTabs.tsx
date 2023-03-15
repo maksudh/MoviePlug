@@ -29,7 +29,7 @@ export default function UserTabs() {
             iconName = focused
               ? 'ios-home'
               : 'ios-home-outline';
-            } else if (route.name === 'Watch list') {
+            } else if (route.name === 'My Movies') {
               iconName = focused ? 'ios-list' : 'ios-list-outline';
             }
               else if (route.name === 'Discover') {
@@ -45,19 +45,19 @@ export default function UserTabs() {
       })}
       >
         <Tab.Screen 
-        name="For you" 
-        component={HomeScreen} 
-        />
-        <Tab.Screen 
         name="Discover" 
         component={DiscoverScreen}
+        />
+        <Tab.Screen 
+        name="For you" 
+        component={HomeScreen} 
         />
         <Tab.Screen 
         name="Search" 
         component={SearchScreen}
         />
         <Tab.Screen 
-        name="Watch list" 
+        name="My Movies" 
         component={WatchListcreen}
         />
       </Tab.Navigator>

@@ -1,4 +1,5 @@
 import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet, Text, View ,TextInput, Image} from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useState, useEffect } from 'react';
@@ -7,28 +8,33 @@ import { Button, Card } from 'react-native-elements';
 import { getAuth, signOut} from 'firebase/auth';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import { getDatabase, ref, child, push, get, update, onValue, remove } from "firebase/database";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { color } from '@rneui/base';
+
 
 const auth = getAuth();
 
-const UserAccount: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const { user } = useAuthentication();
   const db = getDatabase();
-  const [data, setData] = useState([]);
-  const [moviekeys, setMoviekeys] = useState([]);
   const dbRef = ref(db);
 
-  const clearOnboarding = async () => {
+  // UNCOMMENT THIS WHEN READY TO USE
+
+  // useEffect(() => {
+  //   setTimeout(getUserData,1000);
+  // },);
+
+  const completeSurvery = async () => {
     try {
-      await AsyncStorage.removeItem('@viewOnboarding')
+        await AsyncStorage.setItem('@viewOnboarding', 'true')
     } catch {
-        console.log("Error @clearOnboarding")
+        console.log('Error @setItem')
     }
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.userBar}>
+      <View>
         <Text style={{
           fontSize: 18,
           marginTop: 7,
@@ -56,12 +62,31 @@ const UserAccount: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         }}
         onPress={() => signOut(auth)} 
         />
+        <Button 
+        title="CompleteSurvey"
+        icon={{
+          name: 'user',
+          type: 'font-awesome',
+          size: 15,
+          color: 'white',
+        }}
+        iconRight
+        iconContainerStyle={{ marginLeft: 10 }}
+        titleStyle={{ fontWeight: '700' }}
+        buttonStyle={{
+          backgroundColor: '#fd9426',
+          borderColor: 'transparent',
+          borderWidth: 0,
+          borderRadius: 30,
+        }}
+        containerStyle={{
+          width: 200,
+        }}
+        onPress={() => completeSurvery()} 
+        />
       </View>
-      <Button
-      title="Reset onboarding"
-      onPress={() => clearOnboarding()}
-      />
     </View>
+    
   );
 }
 
@@ -110,4 +135,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default UserAccount;
+export default Survey;

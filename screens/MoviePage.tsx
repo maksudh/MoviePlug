@@ -251,7 +251,7 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
                   iconContainerStyle={{ marginLeft: 20 }}
                   titleStyle={{ fontWeight: '700' }}
                   buttonStyle={{
-                    backgroundColor: '#53d769',
+                    backgroundColor: '#99cc33',
                     borderColor: 'transparent',
                     borderWidth: 0,
                   }}
@@ -293,7 +293,7 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
                   iconContainerStyle={{ marginLeft: 20 }}
                   titleStyle={{ fontWeight: '700' }}
                   buttonStyle={{
-                    backgroundColor: '#e2f11a',
+                    backgroundColor: '#ffcc00',
                     borderColor: 'transparent',
                     borderWidth: 0,
                   }}
@@ -336,7 +336,7 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
                   iconContainerStyle={{ marginLeft: 20 }}
                   titleStyle={{ fontWeight: '700' }}
                   buttonStyle={{
-                    backgroundColor: '#da0610',
+                    backgroundColor: '#cc3300',
                     borderColor: 'transparent',
                     borderWidth: 0,
                   }}
@@ -344,6 +344,7 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
                     width: 300,
                     padding: 10,
                     marginLeft: 13,
+                    marginBottom: 50,
                   }}
                   onPress={() => {
                     writeUserData(

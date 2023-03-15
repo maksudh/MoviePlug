@@ -1,15 +1,37 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState, useEffect } from 'react';
 
 import MoviePage from '../screens/MoviePage';
 import UserTabs from './userTabs';
 import UserAccount from '../screens/UserAccount';
+import Survey from '../screens/Survey';
 
 const Stack = createStackNavigator();
 
 export default function UserStack() {
+  const [viewOnboarding, setViewOnboarding] = useState(false);
+
+  const checkOnboarding = async () => {
+    try{
+      const value = await AsyncStorage.getItem('@viewOnboarding');
+
+      if (value !== null) {
+        setViewOnboarding(true)
+      }
+    } catch {
+        console.log('Error @checkOnboarding:');
+    }
+  }
+
+  useEffect(() => {
+    checkOnboarding();
+  }, [])
+
   return (
+    viewOnboarding ? 
     <NavigationContainer>
       <Stack.Navigator
             screenOptions={{
@@ -39,6 +61,22 @@ export default function UserStack() {
         component={UserAccount} 
         />
       </Stack.Navigator>
-    </NavigationContainer>
+    </NavigationContainer> : 
+     <NavigationContainer>
+      <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#232b2b',
+        },
+        headerTitleStyle: {
+          color: 'white'
+        },
+      }}>
+        <Stack.Screen
+        name="Survey"
+        component={Survey}
+        />
+      </Stack.Navigator>
+     </NavigationContainer>
   );
 }
