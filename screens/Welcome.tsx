@@ -2,10 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { Button } from 'react-native-elements';
+import { StatusBar } from 'expo-status-bar';
 
 const WelcomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
       <View style={styles.buttons}>
         <Button 
         title="Sign in" 

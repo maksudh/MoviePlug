@@ -41,15 +41,16 @@ for user in all_users.each():
             if str(db.child("users").child(user.key()).child("watchlist").child(movie.key()).child("liked").get().val()) == "true":
                 likedmovies.append(int(movie.key()))
                 movietitles.append(str(db.child("users").child(user.key()).child("watchlist").child(movie.key()).child("title").get().val()))
-
                 #taking genre ids for movies in the watchlist and storing them in an array
                 temp = db.child("users").child(user.key()).child("watchlist").child(movie.key()).child("genre_ids").get().val()
+                # print(temp)
                 # print(str(db.child("users").child(user.key()).child("watchlist").child(movie.key()).child("liked").get().val()))
-                usergenres += temp        
+                usergenres +=temp+","
+                # print(usergenres)        
     else:
         print("No movies")
         continue
-        
+    usergenres = usergenres[:-1]
     # print(split_genres)
     # print(res)
     # splitting genres and storing them as integers

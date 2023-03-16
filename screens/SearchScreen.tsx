@@ -6,7 +6,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Button, Card } from 'react-native-elements';
 import { getAuth } from 'firebase/auth';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
-import { Searchbar } from 'react-native-paper';
 
 const auth = getAuth();
 const url = "https://api.themoviedb.org/3/search/movie?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e&query=";
