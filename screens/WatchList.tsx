@@ -51,10 +51,6 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.userBar}>
-        <Text style={{
-          fontSize: 18,
-          color: 'white'
-          }}>{user?.email}</Text>
         <Button 
         title="Settings"
         icon={{
@@ -73,7 +69,7 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           borderRadius: 30,
         }}
         containerStyle={{
-          width: 130,
+          width: 200,
         }}
         onPress={() => navigation.navigate('User Account')}
         />

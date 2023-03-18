@@ -120,7 +120,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
-      <Button
+      {/* <Button
         title = 'Load Data'
         icon={{
           name: 'refresh',
@@ -147,7 +147,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           fetchData3();
           console.log("use effect runs")}
         }
-        />
+        /> */}
         <Text style={styles.scrollTitle}>Movies in genres you like:</Text>
         <ScrollView 
           horizontal={true}

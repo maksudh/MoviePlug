@@ -9,8 +9,6 @@ import { getAuth, signOut} from 'firebase/auth';
 import { useAuthentication } from '../utils/hooks/useAuthentication';
 import { getDatabase, ref, child, push, get, update, onValue, remove } from "firebase/database";
 
-import SearchScreen from './SearchScreen';
-
 const auth = getAuth();
 
 const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
@@ -20,10 +18,35 @@ const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
   const [data3, setData3] = useState([]);
-  const posterBaseUrl = "https://image.tmdb.org/t/p/w500"
+  const posterBaseUrl = "https://image.tmdb.org/t/p/w500";
+  const scrollRef = useRef<ScrollView>();
+
+  const picked1 = () => {
+    scrollRef.current?.scrollTo({
+      x : 770,
+      y : 770,
+        animated : true
+    });
+  }
+
+  const picked2 = () => {
+    scrollRef.current?.scrollTo({
+      x : 1440,
+      y : 1440,
+        animated : true
+    });
+  }
+
+  const picked3 = () => {
+    scrollRef.current?.scrollTo({
+      x : 2410,
+      y : 2410,
+        animated : true
+    });
+  }
   
   async function fetchTrending(){
-    await fetch("https://api.themoviedb.org/3/movie/popular?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e")
+    await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e&language=en-US&page=5")
     .then((response) => response.json())
     .then((data) => {
       setData(data.results);
@@ -35,7 +58,7 @@ const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   };
 
   async function fetchTopRated(){
-    await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e")
+    await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e&language=en-US&page=3")
     .then((response) => response.json())
     .then((data) => {
       setData2(data.results);
@@ -47,7 +70,7 @@ const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   };
 
   async function fetchNowPlaying(){
-    await fetch("https://api.themoviedb.org/3/movie/now_playing?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e")
+    await fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e&language=en-US&page=6")
     .then((response) => response.json())
     .then((data) => {
       setData3(data.results);
@@ -124,38 +147,12 @@ const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-      <View style={styles.userBar}>
-        <Text style={{
-          fontSize: 18,
-          marginTop: 7,
-          color: 'white'
-          }}>{user?.email}</Text>
-        <Button 
-        title="Sign Out"
-        icon={{
-          name: 'user',
-          type: 'font-awesome',
-          size: 15,
-          color: 'white',
-        }}
-        iconRight
-        iconContainerStyle={{ marginLeft: 10 }}
-        titleStyle={{ fontWeight: '700' }}
-        buttonStyle={{
-          backgroundColor: '#fd9426',
-          borderColor: 'transparent',
-          borderWidth: 0,
-          borderRadius: 30,
-        }}
-        containerStyle={{
-          width: 130,
-        }}
-        onPress={() => signOut(auth)} 
-        />
+      <ScrollView ref={scrollRef}>
+      <View style={styles.container}>
+        <Text style={styles.mainText}>Welcome to MoviePlug!</Text>
+        <Text style={styles.mainText}>To finish setting up, please select a movie from each row below:</Text>
       </View>
-      <Text style={styles.scrollTitle}>To finish setting up, please select a movie from each row!</Text>
-      <Text style={styles.scrollTitle}>Current movies:</Text>
+      <Text style={styles.scrollTitle}>First choice:</Text>
         <ScrollView 
           horizontal={true}
           showsHorizontalScrollIndicator={false}
@@ -222,6 +219,7 @@ const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                         String(data.vote_count)
                         );
                         selectedMovie(String(data.title));
+                        picked1();
                       }
                       }
                       />
@@ -230,7 +228,8 @@ const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 );
             })}
             </ScrollView>
-            <Text style={styles.scrollTitle}>Top Rated Movies:</Text>
+            <View style={styles.scrollPadding}></View>
+            <Text style={styles.scrollTitle}>Second choice:</Text>
         <ScrollView 
           horizontal={true}
           showsHorizontalScrollIndicator={false}
@@ -297,6 +296,7 @@ const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                         String(data.vote_count)
                         );
                         selectedMovie(String(data.title));
+                        picked2();
                       }
                       }
                       />
@@ -305,7 +305,8 @@ const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 );
             })}
             </ScrollView>
-            <Text style={styles.scrollTitle}>Popular movies:</Text>
+            <View style={styles.scrollPadding}></View>
+            <Text style={styles.scrollTitle}>Third choice:</Text>
         <ScrollView 
           horizontal={true}
           showsHorizontalScrollIndicator={false}
@@ -372,6 +373,7 @@ const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                         String(data.vote_count)
                         );
                         selectedMovie(String(data.title));
+                        picked3();
                       }
                       }
                       />
@@ -380,26 +382,33 @@ const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 );
             })}
             </ScrollView>
-            <View>
+            <View style={styles.scrollPadding}></View>
+            <View style={styles.scrollPadding}></View>
+            <View style={styles.container}>
+              <Text style={styles.scrollTitle}>You are done setting up!</Text>
+              <Text style={styles.scrollTitle}>Push the button to enter MoviePlug!</Text>
+            </View>
+            <View style={styles.scrollPadding}></View>
+            <View style={styles.container}>
               <Button 
                 title="CompleteSurvey"
                 icon={{
-                  name: 'user',
+                  name: 'check-square-o',
                   type: 'font-awesome',
-                  size: 15,
+                  size: 30,
                   color: 'white',
                 }}
                 iconRight
                 iconContainerStyle={{ marginLeft: 10 }}
-                titleStyle={{ fontWeight: '700' }}
+                titleStyle={{ fontWeight: '700', fontSize: 35 }}
                 buttonStyle={{
-                  backgroundColor: '#fd9426',
+                  backgroundColor: '#02db72',
                   borderColor: 'transparent',
                   borderWidth: 0,
-                  borderRadius: 30,
+                  borderRadius: 10,
                 }}
                 containerStyle={{
-                  width: 200,
+                  width: 350,
                 }}
                 onPress={() => {
                   completeSurvery();
@@ -408,6 +417,8 @@ const Survey: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                 } 
                 />
             </View>
+            <View style={styles.scrollPadding}></View>
+            <View style={styles.scrollPadding}></View>
             </ScrollView>
     </View>
   );
@@ -420,18 +431,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#0e1111',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  userBar: {
-    display: 'flex',
-    flexDirection: 'row',
-    backgroundColor: '#232b2b',
-    justifyContent: 'space-around',
-    padding: 20,
-    paddingBottom: 10,
-  },
-  inputBar: {
-    backgroundColor: '#FAF7F6',
-    flex: 1,
   },
   movieCard: {
     display: 'flex',
@@ -458,9 +457,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   scrollTitle: {
-    margin: 15,
+    margin: 25,
     marginBottom: 5,
-    fontSize: 25,
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  mainText: {
+    margin: 25,
+    marginBottom: 5,
+    fontSize: 31,
     fontWeight: 'bold',
     color: 'white',
   },
@@ -468,6 +474,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 20,
   },
+  scrollPadding: {
+    marginTop: 150
+  }
 });
 
 export default Survey;
