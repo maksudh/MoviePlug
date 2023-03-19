@@ -163,7 +163,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                       justifyContent: 'center',
                       backgroundColor: '#232b2b',
                       borderColor: 'black',
-                      width: 260,
+                      width: 280,
                       }}>
                       <Text key={key}>
                         <Text style={styles.movieTitle}>{data.title}</Text>
@@ -427,7 +427,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   movieTitle: {
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: 'bold',
     color: 'white'
   },
@@ -443,8 +443,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   movieposter: {
-    width: 200,
-    height: 250,
+    width: 210,
+    height: 260,
   }
 });
 

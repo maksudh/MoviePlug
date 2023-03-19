@@ -95,11 +95,10 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                         source={{uri: posterBaseUrl+data.poster_path}}
                       />
                       <Text style={{color: '#232b2b'}}>sp</Text>
-                      <Text key={key} style={{flex: 1, flexWrap: 'wrap', color: 'white'}}>{data.overview}</Text>
+                      <Text key={key} numberOfLines={14} style={{ width: 100, flex: 1, flexWrap: 'wrap', color: 'white'}}>{data.overview}</Text>
                   </View>
                   <View style={styles.buttonCluster}>
                     <Button 
-                    title="Details" 
                     icon={{
                       name: 'expand',
                       type: 'font-awesome',
@@ -115,14 +114,13 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                       borderWidth: 0,
                     }}
                     containerStyle={{
-                      width: 130,
+                      width: 50,
                     }}
                     onPress={() => navigation.navigate('Details', 
                     { genre_ids : data.genre_ids, id : data.id })}/>
                     <Button
-                      title="Remove"
                       icon={{
-                        name: 'remove',
+                        name: 'thumbs-down',
                         type: 'font-awesome',
                         size: 15,
                         color: 'white',
@@ -131,18 +129,74 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                       iconContainerStyle={{ marginLeft: 10 }}
                       titleStyle={{ fontWeight: '700' }}
                       buttonStyle={{
-                        backgroundColor: '#fc3d39',
+                        backgroundColor: '#cc3300',
                         borderColor: 'transparent',
                         borderWidth: 0,
                       }}
                       containerStyle={{
-                        width: 130,
+                        width: 50,
                       }}
                       onPress={() => {
-                        removeEntryFixed(user?.uid,data.id);
-                        addedalert(String(data.title));
-                      }
-                      }
+                        writeUserData(
+                          String(user?.uid),
+                          String(user?.email),
+                          String(data.adult),
+                          String(data.backdrop_path),
+                          String(data.genre_ids),
+                          String(data.id),
+                          String(data.original_language),
+                          String(data.overview),
+                          String(data.popularity),
+                          String(data.poster_path),
+                          String(data.release_date),
+                          String(data.title),
+                          String(data.video),
+                          String(data.vote_average),
+                          String(data.vote_count)
+                          );
+                        dislikeMovie(String(data.id));
+                        dislikedalert(String(data.title));
+                      }}
+                      />
+                    <Button
+                      icon={{
+                        name: 'thumbs-up',
+                        type: 'font-awesome',
+                        size: 15,
+                        color: 'white',
+                      }}
+                      iconRight
+                      iconContainerStyle={{ marginLeft: 10 }}
+                      titleStyle={{ fontWeight: '700' }}
+                      buttonStyle={{
+                        backgroundColor: '#ffcc00',
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                      }}
+                      containerStyle={{
+                        width: 50,
+                      }}
+                      onPress={() => {
+                        writeUserData(
+                          String(user?.uid),
+                          String(user?.email),
+                          String(data.adult),
+                          String(data.backdrop_path),
+                          String(data.genre_ids),
+                          String(data.id),
+                          String(data.original_language),
+                          String(data.overview),
+                          String(data.popularity),
+                          String(data.poster_path),
+                          String(data.release_date),
+                          String(data.title),
+                          String(data.video),
+                          String(data.vote_average),
+                          String(data.vote_count)
+                          );
+                        likeMovie(String(data.id));
+                        likedalert(String(data.title));
+                      }}
                       />
                   </View>
                 </Card>
@@ -184,8 +238,8 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   movieposter: {
-    width: 120,
-    height: 170,
+    width: 150,
+    height: 200,
   },
   movieTitle: {
     fontSize: 20,
