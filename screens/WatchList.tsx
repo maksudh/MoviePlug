@@ -112,14 +112,14 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   function convertStatus(liked){
     if (liked){
       if (liked == "true"){
-        return "👍";
+        return "💜 Liked";
       }
       else {
-        return "👎";
+        return "🤍 Disliked";
       }
     }
     else{
-      return
+      return "To watch... ✍"
     }
   }
 
@@ -201,46 +201,6 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                     { genre_ids : data.genre_ids, id : data.id })}/>
                     <Button
                       icon={{
-                        name: 'thumbs-down',
-                        type: 'font-awesome',
-                        size: 15,
-                        color: 'white',
-                      }}
-                      iconRight
-                      iconContainerStyle={{ marginLeft: 10 }}
-                      titleStyle={{ fontWeight: '700' }}
-                      buttonStyle={{
-                        backgroundColor: '#cc3300',
-                        borderColor: 'transparent',
-                        borderWidth: 0,
-                      }}
-                      containerStyle={{
-                        width: 50,
-                      }}
-                      onPress={() => {
-                        writeUserData(
-                          String(user?.uid),
-                          String(user?.email),
-                          String(data.adult),
-                          String(data.backdrop_path),
-                          String(data.genre_ids),
-                          String(data.id),
-                          String(data.original_language),
-                          String(data.overview),
-                          String(data.popularity),
-                          String(data.poster_path),
-                          String(data.release_date),
-                          String(data.title),
-                          String(data.video),
-                          String(data.vote_average),
-                          String(data.vote_count)
-                          );
-                        dislikeMovie(String(data.id));
-                        dislikedalert(String(data.title));
-                      }}
-                      />
-                    <Button
-                      icon={{
                         name: 'thumbs-up',
                         type: 'font-awesome',
                         size: 15,
@@ -277,6 +237,46 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           );
                         likeMovie(String(data.id));
                         likedalert(String(data.title));
+                      }}
+                      />
+                    <Button
+                      icon={{
+                        name: 'thumbs-down',
+                        type: 'font-awesome',
+                        size: 15,
+                        color: 'white',
+                      }}
+                      iconRight
+                      iconContainerStyle={{ marginLeft: 10 }}
+                      titleStyle={{ fontWeight: '700' }}
+                      buttonStyle={{
+                        backgroundColor: '#cc3300',
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                      }}
+                      containerStyle={{
+                        width: 50,
+                      }}
+                      onPress={() => {
+                        writeUserData(
+                          String(user?.uid),
+                          String(user?.email),
+                          String(data.adult),
+                          String(data.backdrop_path),
+                          String(data.genre_ids),
+                          String(data.id),
+                          String(data.original_language),
+                          String(data.overview),
+                          String(data.popularity),
+                          String(data.poster_path),
+                          String(data.release_date),
+                          String(data.title),
+                          String(data.video),
+                          String(data.vote_average),
+                          String(data.vote_count)
+                          );
+                        dislikeMovie(String(data.id));
+                        dislikedalert(String(data.title));
                       }}
                       />
                     <Button
