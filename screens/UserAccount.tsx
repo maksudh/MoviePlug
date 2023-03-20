@@ -34,7 +34,9 @@ const UserAccount: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           marginTop: 7,
           color: 'white'
           }}>{user?.email}</Text>
-        <Button 
+      </View>
+      <View style={styles.buttons}>
+      <Button 
         title="Sign Out"
         icon={{
           name: 'user',
@@ -56,11 +58,21 @@ const UserAccount: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         }}
         onPress={() => signOut(auth)} 
         />
-      </View>
       <Button
       title="Reset onboarding"
+      titleStyle={{ fontWeight: '700' }}
+      buttonStyle={{
+        backgroundColor: '#fd9426',
+        borderColor: 'transparent',
+        borderWidth: 0,
+        borderRadius: 30,
+      }}
+      containerStyle={{
+        width: 130,
+      }}
       onPress={() => clearOnboarding()}
       />
+      </View>
     </View>
   );
 }
@@ -106,6 +118,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 5,
     paddingBottom: 5,
+    justifyContent: 'space-around'
+  },
+  buttons: {
+    padding: 15,
+    flexDirection: 'row',
     justifyContent: 'space-around'
   }
 });

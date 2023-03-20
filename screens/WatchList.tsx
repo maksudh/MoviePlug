@@ -32,6 +32,63 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     });
   }
 
+  function writeUserData(
+    userId, 
+    email, 
+    adult, 
+    backdrop_path, 
+    genre_ids, 
+    id, 
+    original_language, 
+    overview, 
+    popularity,
+    poster_path,
+    release_date,
+    title,
+    video,
+    vote_average,
+    vote_count
+    ){
+    const db = getDatabase();
+    const movieEntry = {
+      adult : adult,
+      backdrop_path : backdrop_path,
+      genre_ids : genre_ids,
+      id : id,
+      original_language : original_language,
+      overview : overview,
+      popularity : popularity,
+      poster_path : poster_path,
+      release_date : release_date,
+      title : title,
+      video : video,
+      vote_average : vote_average,
+      vote_count :vote_count
+    }
+    // const newEntryKey = push(child(ref(db, 'users/'+userId), 'watchlist')).key
+    const updates ={}
+
+    update(ref(db, 'users/'+userId),{
+      email: email,
+    });
+
+    // updates['/watchlist/'+newEntryKey] = movieEntry;
+    updates['/watchlist/'+id] = movieEntry;
+    return update(ref(db, 'users/'+userId),updates);
+  }
+
+  function likeMovie(id){
+    const db = getDatabase();
+    const liked = { liked : "true"}
+    update(ref(db, 'users/'+user?.uid+'/watchlist/'+id),liked)
+  }
+
+  function dislikeMovie(id){
+    const db = getDatabase();
+    const liked = { liked : "false"}
+    update(ref(db, 'users/'+user?.uid+'/watchlist/'+id),liked)
+  }
+
   function removeEntryFixed(userId, key){
     const dfRef = ref(db);
     remove(ref(db, 'users/'+userId+'/watchlist/'+key));
@@ -41,6 +98,30 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   Alert.alert('Removed '+title+' from watchlist!', '', [
     {text: 'OK', onPress: () => console.log('OK Pressed')},
   ]);
+
+  const likedalert = (title) =>
+  Alert.alert('You liked '+title+'!', '', [
+    {text: 'OK', onPress: () => console.log('OK Pressed')},
+  ]);
+
+  const dislikedalert = (title) =>
+  Alert.alert('You disliked '+title+'!', '', [
+    {text: 'OK', onPress: () => console.log('OK Pressed')},
+  ]);
+
+  function convertStatus(liked){
+    if (liked){
+      if (liked == "true"){
+        return "👍";
+      }
+      else {
+        return "👎";
+      }
+    }
+    else{
+      return
+    }
+  }
 
   useEffect(() => {  
     setTimeout(() => {
@@ -95,7 +176,7 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                         source={{uri: posterBaseUrl+data.poster_path}}
                       />
                       <Text style={{color: '#232b2b'}}>sp</Text>
-                      <Text key={key} numberOfLines={14} style={{ width: 100, flex: 1, flexWrap: 'wrap', color: 'white'}}>{data.overview}</Text>
+                      <Text key={key} numberOfLines={13} style={{ width: 100, flex: 1, flexWrap: 'wrap', color: 'white'}}><Text style={{fontSize: 15, fontWeight: 'bold', color: 'white'}}>{convertStatus(data.liked)}</Text>{'\n'}{'\n'}{data.overview}</Text>
                   </View>
                   <View style={styles.buttonCluster}>
                     <Button 
@@ -198,6 +279,29 @@ const WatchListcreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                         likedalert(String(data.title));
                       }}
                       />
+                    <Button
+                      icon={{
+                        name: 'remove',
+                        type: 'font-awesome',
+                        size: 15,
+                        color: 'white',
+                      }}
+                      iconRight
+                      iconContainerStyle={{ marginLeft: 10 }}
+                      titleStyle={{ fontWeight: '700' }}
+                      buttonStyle={{
+                        backgroundColor: '#cc3d47',
+                        borderColor: 'transparent',
+                        borderWidth: 0,
+                      }}
+                      containerStyle={{
+                        width: 50,
+                      }}
+                      onPress={() => {
+                        removeEntryFixed(user?.uid,data.id);
+                        addedalert(String(data.title));
+                      }}
+                      />
                   </View>
                 </Card>
               );
@@ -252,6 +356,10 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     justifyContent: 'space-around',
+  },
+  liketext: {
+    fontSize: 20,
+    fontWeight: 'bold',
   }
 });
 

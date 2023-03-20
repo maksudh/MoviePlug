@@ -192,7 +192,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                         borderWidth: 0,
                       }}
                       containerStyle={{
-                        width: 200,
+                        width: 230,
                         padding: 5,
                         marginLeft: 3,
                       }}
@@ -218,7 +218,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           justifyContent: 'center',
                           backgroundColor: '#232b2b',
                           borderColor: 'black',
-                          width: 260,
+                          width: 280,
                           }}>
                           <Text key={key}>
                             <Text style={styles.movieTitle}>{data.title}</Text>
@@ -247,7 +247,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             borderWidth: 0,
                           }}
                           containerStyle={{
-                            width: 200,
+                            width: 230,
                             padding: 5,
                             marginLeft: 3,
                           }}
@@ -275,7 +275,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           justifyContent: 'center',
                           backgroundColor: '#232b2b',
                           borderColor: 'black',
-                          width: 260,
+                          width: 280,
                           }}>
                           <Text key={key}>
                             <Text style={styles.movieTitle}>{data.title}</Text>
@@ -304,7 +304,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             borderWidth: 0,
                           }}
                           containerStyle={{
-                            width: 200,
+                            width: 230,
                             padding: 5,
                             marginLeft: 3,
                           }}
@@ -324,7 +324,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           justifyContent: 'center',
                           backgroundColor: '#232b2b',
                           borderColor: 'black',
-                          width: 260,
+                          width: 280,
                           }}>
                           <Text key={key}>
                             <Text style={styles.movieTitle}>{data.title}</Text>
@@ -353,7 +353,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             borderWidth: 0,
                           }}
                           containerStyle={{
-                            width: 200,
+                            width: 230,
                             padding: 5,
                             marginLeft: 3,
                           }}
@@ -373,7 +373,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                           justifyContent: 'center',
                           backgroundColor: '#232b2b',
                           borderColor: 'black',
-                          width: 260,
+                          width: 280,
                           }}>
                           <Text key={key}>
                             <Text style={styles.movieTitle}>{data.title}</Text>
@@ -402,7 +402,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
                             borderWidth: 0,
                           }}
                           containerStyle={{
-                            width: 200,
+                            width: 230,
                             padding: 5,
                             marginLeft: 3,
                           }}
@@ -443,8 +443,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   movieposter: {
-    width: 210,
-    height: 260,
+    width: 240,
+    height: 300,
   }
 });
 
