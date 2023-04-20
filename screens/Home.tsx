@@ -39,7 +39,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   }
 
   async function getLikedData(){
-    await get(child(dbRef, 'users/'+String(user?.uid)+'/liked_full'))
+    await get(child(dbRef, 'users/'+String(user?.uid)+'/col_movies'))
     .then((snapshot) => {
       // console.log("snapshot: "+snapshot.val())
       var movies2 = [];
@@ -48,7 +48,6 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       });
       movies2 = movies2.slice(0,10);
       setFull(movies2)
-      // console.log("full movies: "+full)
     });
   }
 
