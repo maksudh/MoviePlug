@@ -17,6 +17,8 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
   const [video, setVideo] = useState([]);
   const { genre_ids, id } = route.params; 
 
+  // function for writing user data
+
   function writeUserData(
     userId, 
     email, 
@@ -61,6 +63,8 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
     updates['/watchlist/'+id] = movieEntry;
     return update(ref(db, 'users/'+userId),updates);
   }
+
+  // function for liking movies and disliking them
 
   function likeMovie(id){
     const db = getDatabase();
@@ -143,6 +147,7 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
     return cgen;
   }
 
+  // functions for getting data and getting the corresponding video data
   function fetchData(){
     fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=a74bbbe22b9c0d64a7450f6cb18ee75e&language=en-US")
     .then((response) => response.json())
@@ -166,6 +171,7 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
         console.log(error)
       });
   };
+  // functions for alerts for the shortcuts 
 
   const addedalert = (title) =>
   Alert.alert('Added '+title+' to watchlist!', '', [
@@ -186,6 +192,8 @@ const MoviePage: React.FC<StackScreenProps<any>> = ({ route, navigation }) => {
     fetchData();
     getVideo();
   }, [id]);
+
+  // displays cards for the movies with shortcuts
 
   return (
     <View style={styles.container}>

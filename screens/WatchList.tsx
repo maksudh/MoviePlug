@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0e1111',
     color: '#0e1111',
     justifyContent: 'space-around',
-    padding: 20,
+    padding: 10,
     paddingBottom: 10,
   },
   inputBar: {

@@ -14,6 +14,8 @@ const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const { user } = useAuthentication();
   const scrollRef = useRef();
 
+  // scrolling back to top when button pressed
+
   const onPressTouch = () => {
     scrollRef.current?.scrollTo({
       y:0,
@@ -21,6 +23,7 @@ const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     });
   }
   
+  // function to fetch data for movies
   async function fetchData(){
     await fetch(url)
     .then((response) => response.json())
@@ -33,13 +36,18 @@ const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       });
   };
 
+  // fetches data before app is rendered
+
   useEffect(() => {
     fetchData();
   }, [url]);
 
+  // changes url based on button pressed
   function changeURL(url){
     setUrl(url);
   }
+
+  // alerts for shortcuts 
 
   const addedalert = (title) =>
   Alert.alert('Added '+title+' to watchlist!', '', [
@@ -55,6 +63,8 @@ const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   Alert.alert('You disliked '+title+'!', '', [
     {text: 'OK', onPress: () => console.log('OK Pressed')},
   ]);
+
+  // writes user data to firebase for movie selected
 
   function writeUserData(
     userId, 
@@ -113,6 +123,7 @@ const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     update(ref(db, 'users/'+user?.uid+'/watchlist/'+id),liked)
   }
 
+  // converts genres based on genre id
   function convertGenres(genre_ids){
     const g = genre_ids;
     const garr = g.split(',');
@@ -181,7 +192,7 @@ const DiscoverScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     console.log(cgen);
     return cgen;
   }
-
+// displays cards with movies and shortcut buttons 
   return (
     <View style={styles.container}>
       <ScrollView

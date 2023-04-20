@@ -29,10 +29,10 @@ all_genres = db.child("col_genres").get()
 
 # loop to get each users fav genres and liked movies 
 
-print("Starting loop for users top 3 genres and liked movie data...")
+# print("Starting loop for users top 3 genres and liked movie data...")
 
 for user in all_users.each():
-    print(user.key())
+    # print(user.key())
     likedmovies = []
     movietitles = []
     usergenres = ""
@@ -48,7 +48,7 @@ for user in all_users.each():
                 usergenres +=temp+","
                 # print(usergenres)        
     else:
-        print("No movies")
+        # print("No movies")
         continue
     usergenres = usergenres[:-1]
     # print(split_genres)
@@ -59,14 +59,14 @@ for user in all_users.each():
         split_genres = usergenres.split(",")
         res = [eval(i) for i in split_genres]
         occurence_count = Counter(res)
-        print(occurence_count)
+        # print(occurence_count)
         mos_com = occurence_count.most_common(3)
-        print(mos_com)
+        # print(mos_com)
         top3generes = [key for key, val in mos_com]
-        print(top3generes)
+        # print(top3generes)
         db.child("users").child(user.key()).child("pref_genres").set(top3generes)
     else:
-        print("No liked movies")
+        # print("No liked movies")
         continue
 
     # storing full movie data for liked movies
@@ -82,50 +82,47 @@ for user in all_users.each():
     jdata = data.json()
     db.child("users").child(user.key()).child("rec_movies").set(jdata['results'])
 
-print("User top 3 genres and liked movie data complete.")
+# print("User top 3 genres and liked movie data complete.")
 
-print("Starting loop for genre clusters...")
+# print("Starting loop for genre clusters...")
 
 # storing users liked movies in their genre cluster for collab recommendations
 for user in all_users.each():
-    print(user.key())
+    # print(user.key())
     if db.child("users").child(user.key()).child("pref_genres").get().val():
         mostlikedgenre = db.child("users").child(user.key()).child("pref_genres").get().val()
-        print(mostlikedgenre[0])
+        # print(mostlikedgenre[0])
         # likedmovieslist = db.child("users").child(user.key()).child("liked_movies").get().val()
         for movie in db.child("users").child(user.key()).child("liked_full").get():
             db.child("col_genres").child(mostlikedgenre[0]).child(movie.key()).set(movie.val())
     else:
-        print("No liked movies for cluster")
+        # print("No liked movies for cluster")
         continue
 
-print("Genre clusters complete.")
+# print("Genre clusters complete.")
 
-print("Taking cluster movies and storing in users database...")
+# print("Taking cluster movies and storing in users database...")
 
+# going through clusters and storing users cluster movies into their databse
 for user in all_users.each():
-    print(user.key())
+    # print(user.key())
     if db.child("users").child(user.key()).child("pref_genres").get().val():
         mostlikedgenre = db.child("users").child(user.key()).child("pref_genres").get().val()
         # likedmovieslist = db.child("users").child(user.key()).child("liked_movies").get().val()
         for genres in all_genres.each():
-            print(genres.key())
+            # print(genres.key())
             # print(genres.val())
             if mostlikedgenre[0] == int(genres.key()):
-                print("Users cluster is "+ str(genres.key()))
+                # print("Users cluster is "+ str(genres.key()))
                 db.child("users").child(user.key()).child("col_movies").set(genres.val())
             else:
                 pass
     else:
-        print("No pref genre to store movies")
+        # print("No pref genre to store movies")
         continue
 
-print("Everything complete.")
+# print("Everything complete.")
 
-# def jprint(obj):
-#     # create a formatted string of the Python JSON object
-#     text = json.dumps(obj, sort_keys=True, indent=4)
-#     print(text)
 
 
 

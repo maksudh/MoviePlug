@@ -21,6 +21,8 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const { user } = useAuthentication();
   const db = getDatabase();
   const dbRef = ref(db);
+
+  // functions to get user data for recommended movies, like movies as well as their top 3 liked movies
   
   async function getUserData(){
     await get(child(dbRef, 'users/'+String(user?.uid)+'/rec_movies'))
@@ -100,7 +102,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     return <h2>🌀 Loading...</h2>;
   }
 
-// Change back to realtime when ready USE "LIKED" as a param to make it run all the time
+// Runs all fetch data functions every second to make sure the app updates in real time
   useEffect(() => {
     setTimeout(() => {
       getUserData();
@@ -113,6 +115,7 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     }, 1000);
   },[liked]);
 
+  // displays cards for the movies fetched by the api
   return (
     <View style={styles.container}>
       <StatusBar style="light"/>
@@ -120,34 +123,6 @@ const HomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
-      {/* <Button
-        title = 'Load Data'
-        icon={{
-          name: 'refresh',
-          type: 'font-awesome',
-          size: 20,
-          color: 'white',
-        }}
-        buttonStyle={{
-          backgroundColor: '#99aab5',
-          borderColor: 'transparent',
-          borderWidth: 0,
-          height: 40
-        }}
-        containerStyle={{
-          width: 390,
-          padding: 20,
-        }}
-        onPress={() => {    
-          getUserData();
-          getLikedData();
-          getLikedMovies();
-          fetchData();
-          fetchData2();
-          fetchData3();
-          console.log("use effect runs")}
-        }
-        /> */}
         <Text style={styles.scrollTitle}>Movies in genres you like:</Text>
         <ScrollView 
           horizontal={true}

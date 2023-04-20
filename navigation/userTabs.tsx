@@ -9,6 +9,8 @@ import WatchListcreen from '../screens/WatchList';
 
 const Tab = createBottomTabNavigator();
 
+// all pages for the app, including menu bar
+
 export default function UserTabs() {
   return (
       <Tab.Navigator

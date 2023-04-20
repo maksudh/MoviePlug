@@ -8,6 +8,8 @@ import SignOutScreen from '../screens/SignUpScreen';
 
 const Stack = createStackNavigator();
 
+// Authenticater stack, sign in, sign up and sign out all located here
+
 export default function AuthStack() {
   return (
     <NavigationContainer>

@@ -12,6 +12,8 @@ import { StatusBar } from 'expo-status-bar';
 
 const Stack = createStackNavigator();
 
+// sees if user has been through on boarding or not and chooses to go to the user stack with it or not
+
 export default function UserStack() {
   const [viewOnboarding, setViewOnboarding] = useState(false);
 
